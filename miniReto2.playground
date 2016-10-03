@@ -1,0 +1,58 @@
+//: Playground - noun: a place where people can play
+import UIKit
+enum Velocidades: Int {
+    case apagado = 0, velocidadBaja = 20, VelocidadMedia = 50, VelocidadAlta = 120;
+    init(velocidadInicial : Velocidades)
+    {
+        self = .apagado;
+    }
+}
+
+class Auto{
+    var velocidad : Velocidades;
+    var numero = 0;
+    var mensaje = "-";
+    init()
+    {
+        velocidad = Velocidades(velocidadInicial : Velocidades.apagado);
+    }
+    func cambioDeVelocidad()->(actual : Int, velocidadEnCadena: String)
+    {
+        if(velocidad.rawValue == 0)
+        {
+            self.velocidad = Velocidades.velocidadBaja;
+            self.numero = 0;
+            self.mensaje = "Apagado";
+        }
+        else if(velocidad.rawValue == 20)
+        {
+            self.velocidad = Velocidades.VelocidadMedia;
+            self.numero = 20;
+            self.mensaje = "Velocidad Baja";
+        }
+        else if(velocidad.rawValue == 50)
+        {
+            self.velocidad = Velocidades.VelocidadAlta;
+            self.numero = 50;
+            self.mensaje = "Velocidad Media";
+        }
+        else if(velocidad.rawValue == 120)
+        {
+            velocidad = Velocidades.VelocidadMedia;
+            self.numero = 120;
+            self.mensaje = "Velocidad Alta";
+        }
+        
+        var resultado = (self.numero, self.mensaje);
+        return resultado;
+    }
+}
+
+var carro : Auto = Auto();
+var bandera : Int = 0;
+repeat
+{
+    var valores = carro.cambioDeVelocidad();
+    print("\(valores.actual) --- \(valores.velocidadEnCadena)");
+    bandera += 1;
+}while bandera < 20
